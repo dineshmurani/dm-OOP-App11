@@ -14,6 +14,7 @@ class Weather:
             url = f"http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={apikey}&units=imperial"
             r = requests.get(url)
             self.data = r.json()
+            # print(self.data)
         elif lat and lon:
             url = f"http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}8&appid={apikey}&units=imperial"
             # print(url)
@@ -21,6 +22,9 @@ class Weather:
             self.data = r.json()
         else:
             raise TypeError("provide either a city or lat and lon arguments")
+
+        if self.data['cod'] != "200":
+            raise ValueError(self.data["message"])
 
 
     def next_12h(self):
