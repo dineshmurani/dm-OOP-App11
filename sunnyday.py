@@ -1,4 +1,4 @@
-import requests
+import requests, pprint
 
 
 # apikey ="c0c7cb62c5e8740501f9c83e45bd7dd7"
@@ -25,14 +25,17 @@ class Weather:
 
     def next_12h(self):
         # print(self.data)
-        return self.data
+        return self.data['list'][:4]
 
     def next_12h_simplified(self):
-        pass
+        simple_data = []
+        for dicty in self.data['list'][:4]:
+            simple_data.append((dicty['dt_txt'], dicty['main']['temp'], dicty['weather'][0]['description']))
+        return simple_data
 
 # weather = Weather(apikey="c0c7cb62c5e8740501f9c83e45bd7dd7", city="San Jose")
 weather = Weather(apikey="c0c7cb62c5e8740501f9c83e45bd7dd7", city="Madrid", lat = 4.1, lon = 4.5)
 # print(weather.data)
-print(weather.next_12h())
+pprint.pprint(weather.next_12h_simplified())
 
 
