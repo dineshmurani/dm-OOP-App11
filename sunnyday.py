@@ -20,18 +20,18 @@ class Weather:
             r = requests.get(url)
             self.data = r.json()
         else:
-            print("Provide either a city or lat and lon arguments")
+            raise TypeError("provide either a city or lat and lon arguments")
 
 
     def next_12h(self):
         # print(self.data)
-        return self.data['list'][:4]
+        return self.data
 
     def next_12h_simplified(self):
         pass
 
 # weather = Weather(apikey="c0c7cb62c5e8740501f9c83e45bd7dd7", city="San Jose")
-weather = Weather(apikey="c0c7cb62c5e8740501f9c83e45bd7dd7", lat = 4.1, lon = 4.5)
+weather = Weather(apikey="c0c7cb62c5e8740501f9c83e45bd7dd7", city="Madrid", lat = 4.1, lon = 4.5)
 # print(weather.data)
 print(weather.next_12h())
 
