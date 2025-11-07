@@ -50,10 +50,19 @@ class Weather:
 
 
     def next_12h(self):
+        """
+        Returns 3-hour data for the next 12 hours as dict.
+        :return:
+        """
         # print(self.data)
         return self.data['list'][:4]
 
     def next_12h_simplified(self):
+        """
+        Returns date, temperature, and sky condition every 3 hours
+        for the next 12 hours as a touple of tuples.
+        :return:
+        """
         simple_data = []
         for dicty in self.data['list'][:4]:
             simple_data.append((dicty['dt_txt'], dicty['main']['temp'], dicty['weather'][0]['description']))
