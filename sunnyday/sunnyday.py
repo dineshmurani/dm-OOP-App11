@@ -30,13 +30,17 @@ class Weather:
 
     >>>> weather1.next_12_simplified()
 
+    sample url to get sky condition icons:
+
+    https://openweathermap.org/img/wn/10d@2x.png
+
     """
     def __init__(self, apikey, city=None, lat=None, lon=None):
         if city:
             url = f"http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={apikey}&units=imperial"
             r = requests.get(url)
             self.data = r.json()
-            
+
         elif lat and lon:
             url = f"http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}8&appid={apikey}&units=imperial"
 
@@ -64,12 +68,9 @@ class Weather:
         """
         simple_data = []
         for dicty in self.data['list'][:4]:
-            simple_data.append((dicty['dt_txt'], dicty['main']['temp'], dicty['weather'][0]['description']))
+            simple_data.append((dicty['dt_txt'], dicty['main']['temp'], dicty['weather'][0]['description'], dicty['weather'][0]['icon']))
         return simple_data
 
-# # weather = Weather(apikey="c0c7cb62c5e8740501f9c83e45bd7dd7", city="San Jose")
-# weather = Weather(apikey="c0c7cb62c5e8740501f9c83e45bd7dd7", city="Madrid", lat = 4.1, lon = 4.5)
-# # print(weather.data)
-# pprint.pprint(weather.next_12h_simplified())
+
 
 
